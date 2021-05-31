@@ -55,11 +55,11 @@ jobs:
         flags: unittests
         fail_ci_if_error: true
       if: ${{ always() }}
-    - name: Upload wheel
-      uses: actions/upload-artifact@v2
+    - name: Upload Package to Test PyPI
+      uses: pypa/gh-action-pypi-publish@master
       with: 
-        name: Pepino wheel
-        path: dist/*.whl
+        password: ${{ secrets.PYPI_SECRET }}
+        repository_url: https://test.pypi.org/legacy/
   publish-test-results:
       name: "Publish Test Results"
       needs: build
