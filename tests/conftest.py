@@ -45,6 +45,7 @@ class GherkinReporter:
         print(f"{step_result.step.keyword} {step_result.step.text} [{result}] ({step_result.duration.microseconds:.2f})")
         self._capture_manager.resume()
 
+
 class FeatureCollector(pytest.Collector):
 
     def __init__(self, parent, fspath) -> None:
@@ -87,6 +88,7 @@ class ScenarioItem(pytest.Item):
     def repr_failure(self, excinfo):
         if isinstance(excinfo.value, PepinoException):
             return self._repr_failure_py(ExceptionInfo.from_exc_info(excinfo.value.exc_info), "short")
+        return ""
 
     def reportinfo(self):
         if self.rule:
