@@ -19,7 +19,7 @@ class AbstractStep:
             daemon=True,
         )
         thread.start()
-        return wrapped
+        return func
 
 
 class given(AbstractStep):  # noqa

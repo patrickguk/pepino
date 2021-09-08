@@ -8,7 +8,7 @@ from _pytest.fixtures import FixtureRequest, pytest_fixture_setup, SubRequest
 from pepino.enums import Hook
 from pepino.registry import registry
 
-from pepino.plugin.pytest import GherkinReporter, FeatureCollector, ProxyPyItem
+from .pytest import GherkinReporter, FeatureCollector, ProxyPyItem
 
 @pytest.mark.trylast
 def pytest_configure(config):

@@ -216,7 +216,7 @@ class GherkinFeature(Feature, GherkinLocation):
     def __init__(self, parsed):
         super().__init__(parsed)
         self._name = parsed["name"]
-        self._tags = parsed["tags"]
+        self._tags = [tag['name'][1:] for tag in parsed["tags"]]
         self._description = parsed.get("description", "")
         self._background = None
         self._scenarios = []

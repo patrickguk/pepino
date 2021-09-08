@@ -1,5 +1,6 @@
 import abc
 import datetime
+from functools import partial
 import sys
 from typing import List, Optional, Tuple, Callable, Dict, Type
 
@@ -47,7 +48,9 @@ class Step(metaclass=abc.ABCMeta):
         try:
             func = self.function
             try:
-                func(*self.args, **self.kwargs)
+                step_func = partial(func, *self.args, **self.kwargs)
+                #step_func()
+                registry.run_hooks(Hook.call_step, step_func)()
                 result.result = Result.PASSED
             except Exception as e:
                 raise CucumberStepException(self.text, self.location) from e

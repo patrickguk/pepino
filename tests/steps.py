@@ -1,8 +1,11 @@
+import logging
+
 from typing import List, Dict
 from pepino import given, when, then, world, DataTable
 from math import factorial
 
 
+logger = logging.getLogger(__name__)
 class Coordinate:
 
     def __init__(self, x: int, y: int):
@@ -37,7 +40,6 @@ def check_number(expected: int):
 def there_are_cucumbers(expected: int):
     world.cucumbers = expected
 
-
 @when("I eat <amount> cucumbers")
 def eat_cucumbers(amount: int):
     world.cucumbers -= amount
@@ -48,13 +50,21 @@ def check_cucumbers_amount(total: int):
     assert world.cucumbers == total, f"Got {world.cucumbers} expected {total}"
 
 
+@given("I log the following: '<message>'")
+def log_some_stuf(message: str):
+    logging.error(message)
+
+@then("The message '<message>' is logged")
+def message_is_logged(message: str, caplog):
+    caplog.text == message
 class DatatablesTest:
 
     def __init__(self):
         self.table: DataTable = None
 
     @given("I have the following:")
-    def given_a_table(self, table: DataTable):
+    def given_a_table(self, table: DataTable
+    ):
         self.table = table
 
     @then("I can convert it to a horizontal dictonary of lists")

@@ -21,6 +21,7 @@ class Hook(Enum):
     post_feature = auto()
     pre_rule = auto()
     post_rule = auto()
+    call_step = auto()
 
 
 class Step(Enum):

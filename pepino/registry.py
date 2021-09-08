@@ -58,7 +58,9 @@ class CucumberRegistry:
 
     def run_hooks(self, hook, obj):
         for func in self._hooks_dicts[hook]:
-            func(obj)
+            nobj = func(obj)
+            obj = nobj if nobj else obj
+        return obj
 
 
 registry = CucumberRegistry()
