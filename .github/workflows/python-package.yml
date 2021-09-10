@@ -55,11 +55,6 @@ jobs:
         flags: unittests
         fail_ci_if_error: true
       if: ${{ always() }}
-    - name: Upload Package to Test PyPI
-      uses: pypa/gh-action-pypi-publish@master
-      with: 
-        password: ${{ secrets.TEST_PYPI }}
-        repository_url: https://test.pypi.org/legacy/
   publish-test-results:
       name: "Publish Test Results"
       needs: build
