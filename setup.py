@@ -3,9 +3,9 @@ from setuptools import setup, find_packages
 
 def get_version():
     try:
-        v = subprocess.check_output("git describe --tags", shell=True)
+        v = subprocess.check_output("git describe --tags", shell=True).decode('utf-8')
         if v.startswith("v"):
-            return v[1:]
+            return v[1:].strip()
     except subprocess.CalledProcessError:
         pass
     return "0.0.1"
