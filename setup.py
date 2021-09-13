@@ -1,9 +1,20 @@
+import subprocess
 from setuptools import setup, find_packages
+
+def get_version():
+    try:
+        v = subprocess.check_output("git describe --tags", shell=True)
+        if v.startswith("v"):
+            return v[1:]
+    except subprocess.CalledProcessError:
+        pass
+    return "0.0.1"
 
 setup(
     name='pepino-bdd',         # How you named your package folder (MyLib)
     packages=find_packages(".", include=['pepino*'], exclude=['tests']),   # Chose the same as "name"
-    version='0.1',      # Start with a small number and increase it with every change you make
+    entry_points={"pytest11": ["pepino = pepino.plugin.main" ]}, # Entry point for pytest
+    version=get_version(),      # Start with a small number and increase it with every change you make
     license='GPL2.0',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
     description='Pepino BDD',   # Give a short description about your library
     author='Patrick Gallagher',                   # Type in your name
